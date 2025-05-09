@@ -7,7 +7,6 @@ app = Flask(__name__)
 CORS(app)
 
 def get_db_connection():
-    # Agar DB immediately ready nahin, to retry karte rahen
     for _ in range(5):
         try:
             conn = psycopg2.connect(
@@ -18,7 +17,7 @@ def get_db_connection():
             )
             return conn
         except psycopg2.OperationalError:
-            time.sleep(2)  # 2 seconds baad dobara try karein
+            time.sleep(2)
     raise
 
 def create_table_if_not_exists():
@@ -35,7 +34,6 @@ def create_table_if_not_exists():
     cur.close()
     conn.close()
 
-# Backend jab start ho, yeh function chale:
 create_table_if_not_exists()
 
 @app.route('/add', methods=['POST'])
