@@ -1,0 +1,17 @@
+
+n
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+
+# Node Modules
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Docker
+db_data/
+
