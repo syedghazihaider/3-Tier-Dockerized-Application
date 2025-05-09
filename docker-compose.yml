@@ -1,4 +1,5 @@
 
+
 services:
   backend:
     build:
@@ -10,15 +11,21 @@ services:
       - db
     networks:
       - app-network
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=mydb
+      - DB_USER=postgres
+      - DB_PASSWORD=password
 
   db:
     image: postgres:13
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: mydb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=mydb
     volumes:
-      - db_data:/var/lib/postgresql/data   
+      - pgdata:/var/lib/postgresql/data   # Yeh volume mapping hai, data lose nahi hoga
     networks:
       - app-network
 
@@ -38,4 +45,5 @@ networks:
     driver: bridge
 
 volumes:
-  db_data:                                  
+  pgdata:
+                     
